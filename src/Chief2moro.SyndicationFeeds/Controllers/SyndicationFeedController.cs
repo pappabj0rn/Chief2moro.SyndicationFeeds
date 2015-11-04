@@ -16,32 +16,27 @@ namespace Chief2moro.SyndicationFeeds.Controllers
     {
         protected IContentLoader ContentLoader;
         protected IFeedContentResolver FeedContentResolver;
-        protected IFeedContentFilterer FeedFilterer;
-        protected IFeedDescriptionProvider FeedDescriptionProvider;
+        protected ISyndicationItemFactory SyndicationItemFactory;
 
         public SyndicationFeedController()
         {
             ContentLoader = ServiceLocator.Current.GetInstance<IContentLoader>();
             FeedContentResolver = ServiceLocator.Current.GetInstance<IFeedContentResolver>();
-            FeedFilterer = ServiceLocator.Current.GetInstance<IFeedContentFilterer>();
-            FeedDescriptionProvider = ServiceLocator.Current.GetInstance<IFeedDescriptionProvider>();
+            SyndicationItemFactory = ServiceLocator.Current.GetInstance<ISyndicationItemFactory>();
         }
 
-        public SyndicationFeedController(IContentLoader contentLoader, IFeedContentResolver feedContentResolver, IFeedContentFilterer feedContentFilterer, IFeedDescriptionProvider feedDescriptionProvider)
+        public SyndicationFeedController(IContentLoader contentLoader, IFeedContentResolver feedContentResolver, ISyndicationItemFactory syndicationItemFactory)
         {
             ContentLoader = contentLoader;
             FeedContentResolver = feedContentResolver;
-            FeedFilterer = feedContentFilterer;
-            FeedDescriptionProvider = feedDescriptionProvider;
+            SyndicationItemFactory = syndicationItemFactory;
         }
 
         public ActionResult Index(SyndicationFeedPageType currentPage)
         {
-            var syndicationFactory = new SyndicationItemFactory(ContentLoader, FeedContentResolver, FeedFilterer, FeedDescriptionProvider, currentPage);
-            
             var feed = new SyndicationFeed
             {
-                Items = syndicationFactory.GetSyndicationItems(),
+                Items = SyndicationItemFactory.GetSyndicationItems(currentPage),
                 Id = SiteDefinition.Current.SiteUrl.ToString().TrimEnd('/') + UrlResolver.Current.GetUrl(ContentReference.StartPage),         
                 Title = new TextSyndicationContent(currentPage.PageName),
                 Description = new TextSyndicationContent(currentPage.Description),

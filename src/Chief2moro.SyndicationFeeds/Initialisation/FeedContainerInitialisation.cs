@@ -26,6 +26,8 @@ namespace Chief2moro.SyndicationFeeds.Initialisation
             context.Container.Configure(x => x.For<IFeedContentResolver>().Use<FeedContentResolver>());
             context.Container.Configure(x => x.For<IFeedContentFilterer>().Use<FeedContentFilterer>());
             context.Container.Configure(x => x.For<IFeedDescriptionProvider>().Use<FeedDescriptionProvider>());
+            context.Container.Configure(x => x.For<ISyndicationItemFactory>().Use<SyndicationItemFactory>());
+            context.Container.Configure(x => x.For<IContentCategoryLoader>().Use<EPiServerContentCategoryLoader>());
         }
     }
 }

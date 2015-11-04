@@ -171,9 +171,11 @@
     <Compile Include="Controllers\SyndicationFeedPartialController.cs" />
     <Compile Include="Editor\ContentTypeSelectionFactory.cs" />
     <Compile Include="Editor\FeedPageTypeTabNames.cs" />
+    <Compile Include="EPiServerContentCategoryLoader.cs" />
     <Compile Include="FeedContentFilterer.cs" />
     <Compile Include="FeedContentResolver.cs" />
     <Compile Include="FeedDescriptionProvider.cs" />
+    <Compile Include="IContentCategoryLoader.cs" />
     <Compile Include="IFeedContentFilterer.cs" />
     <Compile Include="IFeedDescriptionProvider.cs" />
     <Compile Include="FeedInformationHandler.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Editor\EnumSelectionFactory%27T.cs" />
     <Compile Include="FeedFormat.cs" />
     <Compile Include="IFeedContentResolver.cs" />
+    <Compile Include="ISyndicationItemFactory.cs" />
     <Compile Include="Models\ContentHolderModel.cs" />
     <Compile Include="Models\SyndicationFeedPageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
